@@ -10,7 +10,9 @@ import org.huifer.dbview.entity.row.DatabasesEntityRowMapper;
 import org.huifer.dbview.entity.row.TablesEntityRowMapper;
 import org.huifer.dbview.service.IDbService;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Service;
 
+@Service
 public class IDbServiceImpl implements IDbService {
 
   /**

@@ -1,12 +1,5 @@
 package org.huifer.dbview.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
 public class TableStructure {
 
 //  column_name
@@ -18,4 +11,39 @@ public class TableStructure {
   private String columnComment;
   private String columnType;
   private Boolean nullable;
+
+  public TableStructure() {
+  }
+
+  public String getColumnName() {
+    return columnName;
+  }
+
+  public void setColumnName(String columnName) {
+    this.columnName = columnName;
+  }
+
+  public String getColumnComment() {
+    return columnComment;
+  }
+
+  public void setColumnComment(String columnComment) {
+    this.columnComment = columnComment;
+  }
+
+  public String getColumnType() {
+    return columnType;
+  }
+
+  public void setColumnType(String columnType) {
+    this.columnType = columnType;
+  }
+
+  public Boolean getNullable() {
+    return nullable;
+  }
+
+  public void setNullable(Boolean nullable) {
+    this.nullable = nullable;
+  }
 }

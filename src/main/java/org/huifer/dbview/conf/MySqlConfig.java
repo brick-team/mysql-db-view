@@ -1,10 +1,5 @@
 package org.huifer.dbview.conf;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
-@Data
-@NoArgsConstructor
 public class MySqlConfig {
 
   public static final String url = "jdbc:mysql://%s:%s/?useUnicode=true&characterEncoding=utf8&useSSL=false";

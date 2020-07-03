@@ -7,7 +7,7 @@ import org.springframework.jdbc.core.RowMapper;
 
 public class TablesEntityRowMapper implements RowMapper<TablesEntity> {
 
-  private String filedName;
+  private final String filedName;
 
   public TablesEntityRowMapper(String filedName) {
     this.filedName = filedName;

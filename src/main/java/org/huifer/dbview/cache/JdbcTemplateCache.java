@@ -21,7 +21,7 @@ public class JdbcTemplateCache {
 
   public static JdbcTemplate get(String ip, int port, String username, String password,
       String dbName) throws SQLException {
-    String s = genKey(ip, String.valueOf(port), username, password,dbName);
+    String s = genKey(ip, String.valueOf(port), username, password, dbName);
     JdbcTemplate jdbcTemplate = jdbcTemplateCache.get(s);
     if (jdbcTemplate != null) {
       return jdbcTemplate;
@@ -39,7 +39,7 @@ public class JdbcTemplateCache {
     } else {
       jdbcUrl = String.format(HAS_DB, ip, port, username, password, dbName);
     }
-    String s = genKey(ip, String.valueOf(port), username, password,dbName);
+    String s = genKey(ip, String.valueOf(port), username, password, dbName);
     Connection target = DriverManager.getConnection(jdbcUrl);
     JdbcTemplate jdbcTemplate = new JdbcTemplate(new SingleConnectionDataSource(target, true));
     jdbcTemplateCache.put(s, jdbcTemplate);

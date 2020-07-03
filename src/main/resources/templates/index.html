@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta
+      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+      name="viewport">
+  <meta content="ie=edge" http-equiv="X-UA-Compatible">
+  <title>db-view</title>
+
+  <!-- 引入样式 -->
+  <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+  <!-- 引入组件库 -->
+
+</head>
+<body>
+<div id="app">
+  <h1>{{message}}</h1>
+
+  <el-container>
+    <el-header>Header</el-header>
+    <el-container>
+      <el-aside width="200px">
+        <div id="left">
+
+          <el-row :key="item" v-for="item in show_databases">
+            <el-button @click.native="show_table">
+              {{ item }}
+            </el-button>
+          </el-row>
+        </div>
+      </el-aside>
+
+
+      <el-main>Main</el-main>
+    </el-container>
+  </el-container>
+
+</div>
+
+</body>
+<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+<script>
+
+  var app = new Vue({
+    el: '#app',
+    data: {
+      message: "dada",
+      show_databases: ["123", "321"],
+      show_tables: []
+    },
+    methods: {
+      get_dbs: function () {
+        axios.get("show/db").then(response => {
+          this.show_databases = response.data.data;
+        });
+      },
+      get_tables: function (db_name) {
+        axios.get("show/table", {params: {db: db_name}}).then(response => {
+          this.show_tables = response.data.data;
+        });
+      },
+      show_tables: function () {
+        console.log("ok");
+      }
+    },
+    created: function () {
+      // this.get_dbs();
+      // this.get_tables("shandsmod3");
+      // console.log(this.show_databases);
+      // console.log(this.show_tables);
+    }
+  })
+
+
+</script>
+<style>
+  .el-header, .el-footer {
+    background-color: #B3C0D1;
+    color: #333;
+    text-align: center;
+    line-height: 60px;
+  }
+
+  .el-aside {
+    background-color: #D3DCE6;
+    color: #333;
+    text-align: center;
+    line-height: 200px;
+  }
+
+  .el-main {
+    background-color: #E9EEF3;
+    color: #333;
+    text-align: center;
+    line-height: 160px;
+  }
+
+  body > .el-container {
+    margin-bottom: 40px;
+  }
+
+  .el-container:nth-child(5) .el-aside,
+  .el-container:nth-child(6) .el-aside {
+    line-height: 260px;
+  }
+
+  .el-container:nth-child(7) .el-aside {
+    line-height: 320px;
+  }
+</style>
+</html>

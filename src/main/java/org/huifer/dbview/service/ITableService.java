@@ -1,6 +1,8 @@
 package org.huifer.dbview.service;
 
 import java.sql.SQLException;
+import org.huifer.dbview.entity.TableDetail;
+import org.huifer.dbview.entity.TableInfoEntity;
 
 /**
  * 表相关信息查询
@@ -14,7 +16,9 @@ import java.sql.SQLException;
  */
 public interface ITableService {
 
-  void tableInfo(String ip, int port, String username, String password, String db,
+  TableInfoEntity tableInfo(String ip, int port, String username, String password, String db,
       String tableName) throws SQLException;
 
+  TableDetail select(String ip, int port, String username, String password, String db,
+      String tableName) throws SQLException;
 }
