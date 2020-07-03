@@ -19,6 +19,12 @@ public class DbController {
   @Autowired
   IDbService dbService;
 
+  /**
+   * 获取所有数据库
+   *
+   * @return
+   * @throws SQLException
+   */
   @GetMapping("/db")
   public ResultVO dbs() throws SQLException {
     MySqlConfig mySqlConfig = MySqlConfigCache.getMySqlConfig();
@@ -29,6 +35,13 @@ public class DbController {
     return new ResultVO("ok", strings, 200);
   }
 
+  /**
+   * 获取所有表
+   *
+   * @param db
+   * @return
+   * @throws SQLException
+   */
   @GetMapping("/table")
   public ResultVO table(
       @RequestParam String db

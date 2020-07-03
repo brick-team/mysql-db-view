@@ -20,6 +20,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/sql")
 public class SqlController {
 
+  /**
+   * 执行sql
+   *
+   * @param sql
+   * @return
+   * @throws SQLException
+   */
   @PostMapping("/exc")
   public ResultVO exc(
       @RequestBody ExcReq sql

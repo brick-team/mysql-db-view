@@ -78,8 +78,18 @@
         </el-table>
 
 
-        </el-table>
       </el-main>
+
+      <el-footer>
+        <el-input
+            :rows="2"
+            placeholder="sql"
+            type="textarea"
+            v-model="textarea">
+        </el-input>
+        <el-button @click="exc" type="primary">执行 sql</el-button>
+
+      </el-footer>
     </el-container>
   </el-container>
 
@@ -104,7 +114,8 @@
       data_list: [
         [1, 2, 3],
         [4, 5, 6]
-      ]
+      ],
+      textarea: "",
 
     },
     methods: {
@@ -135,7 +146,7 @@
       },
       exc: function () {
         axios.post("/sql/exc", {
-          "sql": "SELECT * FROM `hs_work_order_rw`",
+          "sql": this.textarea,
           "db": "shandsmod3"
         }).then(response => {
           this.header = response.data.data.filedName;
@@ -145,7 +156,6 @@
     },
     created: function () {
       console.log("aaa");
-      this.exc();
     }
   })
 
