@@ -1,6 +1,7 @@
 package org.huifer.dbview.service.impl;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -14,8 +15,9 @@ import org.huifer.dbview.entity.row.TableIndexRowMapper;
 import org.huifer.dbview.entity.row.TableStructureRowMapper;
 import org.huifer.dbview.service.ITableService;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Service;
 
-
+@Service
 public class ITableServiceImpl implements ITableService {
 
   public static final String TABLE_INFO = "select column_name,\n"
@@ -76,6 +78,18 @@ public class ITableServiceImpl implements ITableService {
     tableDetail.setData(maps);
     tableDetail.setFiledName(tableInfoEntity.getEnFiled());
     tableDetail.setFiledEnName(tableInfoEntity.getCnFiled());
+
+    List<List<Object>> rel = new ArrayList<>();
+
+    for (Map<String, Object> map : maps) {
+      List<Object> r = new ArrayList<>();
+      map.forEach((k, v) -> {
+        r.add(v);
+      });
+      rel.add(r);
+    }
+    tableDetail.setShowData(rel);
+
     return tableDetail;
   }
 

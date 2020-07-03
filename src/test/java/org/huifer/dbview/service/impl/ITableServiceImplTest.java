@@ -22,7 +22,7 @@ class ITableServiceImplTest {
   public void findAll() throws SQLException {
     ITableService dbService = new ITableServiceImpl();
     TableDetail select = dbService.select(
-        "10.10.0.124", 3306, "shandsmod3", "shandsmod3", "shandsmod3", "hs_pay_log");
+        "10.10.0.124", 3306, "root", "1314dafa9900", "shandsmod3", "hs_pay_log");
     System.out.println();
 
   }

@@ -8,6 +8,15 @@ public class TableDetail {
   private List<Map<String, Object>> data;
   private List<String> filedName;
   private List<String> filedEnName;
+  private List<List<Object>> showData;
+
+  public List<List<Object>> getShowData() {
+    return showData;
+  }
+
+  public void setShowData(List<List<Object>> showData) {
+    this.showData = showData;
+  }
 
   public List<Map<String, Object>> getData() {
     return data;

@@ -9,7 +9,7 @@
   <title>db-view</title>
 
   <!-- 引入样式 -->
-  <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+  <link href="https://unpkg.com/element-ui/lib/theme-chalk/index.css" rel="stylesheet">
   <!-- 引入组件库 -->
 
 </head>
@@ -18,13 +18,48 @@
   <h1>{{message}}</h1>
 
   <el-container>
-    <el-header>Header</el-header>
+    <el-header>
+      <!--      <el-row :gutter="20">-->
+      <!--        <el-col span="6">-->
+      <!--          <div class="grid-content bg-purple">-->
+      <!--            <el-input placeholder="请输入内容" v-model="input"-->
+      <!--                      width="100px"></el-input>-->
+      <!--          </div>-->
+      <!--        </el-col>-->
+
+      <!--        <el-col span="6">-->
+      <!--          <div class="grid-content bg-purple">-->
+      <!--            <el-input placeholder="请输入内容" v-model="input"-->
+      <!--                      width="100px"></el-input>-->
+      <!--          </div>-->
+      <!--        </el-col>-->
+
+      <!--        <el-col span="6">-->
+      <!--          <div class="grid-content bg-purple">-->
+      <!--            <el-input placeholder="请输入内容" v-model="input"-->
+      <!--                      width="100px"></el-input>-->
+      <!--          </div>-->
+      <!--        </el-col>-->
+
+      <!--        <el-col span="6">-->
+      <!--          <div class="grid-content bg-purple">-->
+      <!--            <el-input placeholder="请输入内容" v-model="input"-->
+      <!--                      width="100px"></el-input>-->
+      <!--          </div>-->
+      <!--        </el-col>-->
+      <!--        </el-col>-->
+
+
+      <!--      </el-row>-->
+
+
+    </el-header>
     <el-container>
       <el-aside width="200px">
         <div id="left">
 
           <el-row :key="item" v-for="item in show_databases">
-            <el-button @click.native="show_table">
+            <el-button @click="table_click">
               {{ item }}
             </el-button>
           </el-row>
@@ -32,7 +67,19 @@
       </el-aside>
 
 
-      <el-main>Main</el-main>
+      <el-main>
+
+        <el-table :data="data_list">
+          <el-table-column :label="date" v-for="(date, key) in header">
+            <template scope="scope">
+              {{data_list[scope.$index][key]}}
+            </template>
+          </el-table-column>
+        </el-table>
+
+
+        </el-table>
+      </el-main>
     </el-container>
   </el-container>
 
@@ -42,6 +89,9 @@
 <script src="https://unpkg.com/element-ui/lib/index.js"></script>
 <script src="https://unpkg.com/vue/dist/vue.js"></script>
 <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+<script crossorigin="anonymous"
+        integrity="sha512-VZ6m0F78+yo3sbu48gElK4irv2dzPoep8oo9LEjxviigcnnnNvnTOJRSrIhuFk68FMLOpiNz+T77nNY89rnWDg=="
+        src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"></script>
 <script>
 
   var app = new Vue({
@@ -49,7 +99,13 @@
     data: {
       message: "dada",
       show_databases: ["123", "321"],
-      show_tables: []
+      show_tables: [],
+      header: ["column1", "column2", "column3"],
+      data_list: [
+        [1, 2, 3],
+        [4, 5, 6]
+      ]
+
     },
     methods: {
       get_dbs: function () {
@@ -62,15 +118,34 @@
           this.show_tables = response.data.data;
         });
       },
-      show_tables: function () {
-        console.log("ok");
+      table_find_all: function (db_name, table_name) {
+        axios.get("/table/findAll", {
+          params: {
+            dbName: db_name,
+            tableName: table_name
+          }
+        }).then(response => {
+          this.header = response.data.data.filedName;
+          this.data_list = response.data.data.showData;
+        })
+
+      },
+      table_click: function () {
+        console.log("啊啊啊啊");
+      },
+      exc: function () {
+        axios.post("/sql/exc", {
+          "sql": "SELECT * FROM `hs_work_order_rw`",
+          "db": "shandsmod3"
+        }).then(response => {
+          this.header = response.data.data.filedName;
+          this.data_list = response.data.data.showData;
+        })
       }
     },
     created: function () {
-      // this.get_dbs();
-      // this.get_tables("shandsmod3");
-      // console.log(this.show_databases);
-      // console.log(this.show_tables);
+      console.log("aaa");
+      this.exc();
     }
   })
 

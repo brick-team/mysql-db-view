@@ -37,7 +37,7 @@ public class JdbcTemplateCache {
     if (StringUtils.isEmpty(dbName)) {
       jdbcUrl = String.format(NO_DB, ip, port, username, password);
     } else {
-      jdbcUrl = String.format(HAS_DB, ip, port, username, password, dbName);
+      jdbcUrl = String.format(HAS_DB, ip, port,dbName, username, password);
     }
     String s = genKey(ip, String.valueOf(port), username, password, dbName);
     Connection target = DriverManager.getConnection(jdbcUrl);
