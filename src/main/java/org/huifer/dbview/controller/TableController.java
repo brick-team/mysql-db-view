@@ -54,4 +54,17 @@ public class TableController {
 
     return new ResultVO("ok", select, 200);
   }
+
+  @GetMapping("/index")
+  public ResultVO index(
+          @RequestParam String tableName,
+          @RequestParam String dbName
+  ) throws SQLException {
+    MySqlConfig mySqlConfig = MySqlConfigCache.getMySqlConfig();
+    TableInfoEntity tableInfoEntity = tableService
+            .tableInfo(mySqlConfig.getHost(), mySqlConfig.getPort(), mySqlConfig.getUsername(),
+                    mySqlConfig.getPassword(), dbName, tableName);
+
+    return new ResultVO("ok", tableInfoEntity, 200);
+  }
 }
